@@ -3,6 +3,10 @@ let handler = {
 
         console.log((property))
         return target[property];
+    },
+    set: (target, property, val) => {
+        console.log("setting")
+        target[property] = val;
     }
 }
 
@@ -53,4 +57,6 @@ function hasObject(object) {
 
 jsonData = makeLoggable(jsonData, "root");
 
-console.log((jsonData.root[0].test.test2[0]));
+// console.log((jsonData.root[0].test.test2[0]));
+jsonData.root[0].userId = 5;
+console.log(jsonData.root[0]);
