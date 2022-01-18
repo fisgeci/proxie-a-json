@@ -38,17 +38,17 @@ function makeLoggable(object, parentKey) {
 }
 
 function generateProxy(object, parentKey, value) {
-    if (hasObject(value)) {
+    if (hasObjectOrArray(value)) {
         return new Proxy(makeLoggable(value, parentKey), handler);
     } else {
         return new Proxy(value, handler);
     }
 }
 
-function hasObject(object) {
+function hasObjectOrArray(object) {
     let hasObject = false;
     for (const key of Object.keys(object)) {
-        if (object[key] instanceof Object) {
+        if (object[key] instanceof Object || object[key] instanceof Array) {
             hasObject = true;
         }
     }
@@ -58,5 +58,4 @@ function hasObject(object) {
 jsonData = makeLoggable(jsonData, "root");
 
 // console.log((jsonData.root[0].test.test2[0]));
-jsonData.root[0].userId = 5;
-console.log(jsonData.root[0]);
+console.log(jsonData.root[1].test);
