@@ -38,17 +38,17 @@ function makeLoggable(object, parentKey) {
 }
 
 function generateProxy(object, parentKey, value) {
-    if (hasObjectOrArray(value)) {
+    if (hasObject(value)) {
         return new Proxy(makeLoggable(value, parentKey), handler);
     } else {
         return new Proxy(value, handler);
     }
 }
 
-function hasObjectOrArray(object) {
+function hasObject(object) {
     let hasObject = false;
     for (const key of Object.keys(object)) {
-        if (object[key] instanceof Object || object[key] instanceof Array) {
+        if (typeof object[key] == 'object') {
             hasObject = true;
         }
     }
